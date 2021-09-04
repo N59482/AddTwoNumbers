@@ -12,9 +12,19 @@ class Solution
 {
     public:
     
-    int DoSum(ListNode* l1, ListNode* l2, int &overnine)// функция суммирующа два числа и возвращающая единицы а десятки сохраняются в overnune
+    void ListtoVector(ListNode* l,vector<int> & v) // если остался один лист и отсутствует overnine 
+    //почему не работает с указателем на вектор а только с ссылкой?
     {
-        int sum = l1->val + l2->val + overnine;
+        while(l != nullptr)
+        {
+            v.push_back(l->val);
+            l = l->next;
+        }
+    };
+    
+    int DoSum(ListNode* l1, ListNode* l2, int &overnine)// функция суммирующа два числа и возвращающая единицы а десятки сохраняются в overnine
+    {
+        int sum = l1->val + l2->val + overnine; // ?? + overnine;
             cout<<l1->val<<" + "<<l2->val<<" + "<<overnine<<" = "<<sum<<endl;
         if((sum)>9)
         {
@@ -25,7 +35,7 @@ class Solution
         }
         else
         {
-            cout<<sum<<" !> 9"<<endl
+            cout<<sum<<" !> 9"<<endl;
             overnine = 0;
         }
         return sum;
@@ -33,7 +43,7 @@ class Solution
     
     int DoSum (ListNode* l, int &overnine)// переопределение для работы с одним списком.
     {
-        int sum = l->val + sum;
+        int sum = l->val + overnine;
         cout<<l->val<<" + "<<overnine<<" = "<<sum<<endl;
         if((sum)>9)
         {
@@ -44,7 +54,7 @@ class Solution
         }
         else
         {
-            cout<<sum<<" !> 9"<<endl
+            cout<<sum<<" !> 9"<<endl;
             overnine = 0;
         }
         return sum;
@@ -66,11 +76,21 @@ class Solution
         
         if (l1 == nullptr && l2 != nullptr) // остался только первый список
         {
-            cout<<" остался только первый список"<<endl;
+            cout<<"остался только второй список"<<endl;
+            if(!overnine) ListtoVector(l2, tempV)
+            else
+            
         } else if (l1 != nullptr && l2 == nullptr) // остался только второй список
         {
-            cout<<" остался только второй список"<<endl;
-        }
+            cout<<"остался только первый список"<<endl;
+            if(!overnine) ListtoVector(l1, tempV)
+            else
+            
+        } else if (l1 == nullptr && l2 == nullptr && overnine) // списки пусты но остался overnine
+        {
+            cout<<"списки пусты но остался overnine"<<endl;
+            tempV.push_back(overnine);
+        };
         
         
         ListNode * resList = new ListNode(tempV.at(tempV.size()-1)); // создаём лист с результатом и записываем туда порвое число из временного вектора
