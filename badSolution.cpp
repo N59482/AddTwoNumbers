@@ -12,17 +12,7 @@ class Solution
 {
     public:
     
-    void ListtoVector(ListNode* l,vector<int> & v) // если остался один лист и отсутствует overnine 
-    //почему не работает с указателем на вектор а только с ссылкой?
-    {
-        while(l != nullptr)
-        {
-            v.push_back(l->val);
-            l = l->next;
-        }
-    };
-    
-    int DoSum(ListNode* l1, ListNode* l2, int &overnine)// функция суммирующа два числа и возвращающая единицы а десятки сохраняются в overnine
+    int DoSum(ListNode* l1, ListNode* l2, int &overnine)// функция суммирующа два числа и возвращающая единицы 
     {
         int sum = l1->val + l2->val;
             cout<<l1->val<<" + "<<l2->val<<" + "<<overnine<<" = "<<sum<<endl;
@@ -51,12 +41,6 @@ class Solution
         return sum;
     };
     
-    int DoSum (ListNode* l, int &overnine)// переопределение для работы с одним списком.
-    {
-        int sum = l->val + overnine;
-
-        return sum;
-    };
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
     {
