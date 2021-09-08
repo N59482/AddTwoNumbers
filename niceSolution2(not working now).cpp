@@ -23,14 +23,29 @@ class Solution
 
     void OOL(ListNode * l, ListNode * res) // Only one list - если остался только один лист
     {
+            cout<<"l->val "<<l->val<<endl;
+            cout<<"l->next->val "<<l->next->val<<endl;
+            cout<<"res->val "<<res->val<<endl;
         while(l->next != nullptr) 
         {
+            cout<<"l->val "<<l->val<<endl;
+            cout<<"l->next->val "<<l->next->val<<endl;
+            cout<<"res->val "<<res->val<<endl;
+
             res->next = new ListNode(l->next->val); // записываем след элемент 
+            cout<<"res->next->val "<<res->next->val<<endl;
+            cout<<"MTN..."<<endl;
             MTN(res); // переносим десятки с текущего в следующий если требуется
+
+            cout<<"l->val "<<l->val<<endl;
+            cout<<"l->next->val "<<l->next->val<<endl;
+            cout<<"res->val "<<res->val<<endl;
+            cout<<"res->next->val "<<res->next->val<<endl;
             // шаг
             res = res->next;
             l = l->next;
         };
+        l = l->next;
     };
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
