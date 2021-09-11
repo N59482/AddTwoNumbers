@@ -23,31 +23,16 @@ class Solution
 
     void OOL(ListNode * l, ListNode * res) // Only one list - если остался только один лист
     {
-            cout<<"l->val "<<l->val<<endl;
-            cout<<"l->next->val "<<l->next->val<<endl;
-            cout<<"res->val "<<res->val<<endl;
         while(l->next != nullptr) 
         {
-            cout<<"l->val "<<l->val<<endl;
-            cout<<"l->next->val "<<l->next->val<<endl;
-            cout<<"res->val "<<res->val<<endl;
-
             res->next = new ListNode(l->next->val); // записываем след элемент 
-            cout<<"res->next->val "<<res->next->val<<endl;
-            cout<<"MTN..."<<endl;
             MTN(res); // переносим десятки с текущего в следующий если требуется
-
-            cout<<"l->val "<<l->val<<endl;
-            cout<<"l->next->val "<<l->next->val<<endl;
-            cout<<"res->val "<<res->val<<endl;
-            cout<<"res->next->val "<<res->next->val<<endl;
             // шаг
             res = res->next;
             l = l->next;
         };
-        l = l->next;
     };
-    
+
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
     {
         ListNode * tempList = new ListNode(l1->val + l2->val); // создаём лист с которым будет работать алгоритм и записываем в него сумму первых элементов листа(листы по условию не пустые)
@@ -56,10 +41,8 @@ class Solution
         
         while(l1->next != nullptr && l2->next != nullptr) // Этот цикл суммирует пока в списках один и тот же размер
         {
-            tempList->next = new ListNode(l1->next->val + l2->next->val); // складываем их значение и передаём в конструктор следующего элемента
-
+            tempList->next = new ListNode(l1->next->val + l2->next->val); // складываем их значение и передаём в конструктор следующего элемент
             MTN(tempList);
-            
             // шаг
             tempList = tempList->next;
             l1 = l1->next;
@@ -71,7 +54,10 @@ class Solution
         if (l1->next != nullptr) OOL(l1, tempList);
         else if (l2->next != nullptr) OOL(l2, tempList);
 
-        cout<<"L1 = "<<l1->val<<"L2 = "<<l2->val<<"tempList->val = "<<tempList->val<<endl;
+        // проблема в том что OOL получает  2 указетеля l и res шагает ими (строка 30)
+        // но при этом не меняются показатели l1\l2 и templist которые вроде бы передаются в OOL через указатели.
+        // поэтому после работы функции OOL укащатели l1 и tempList хотя и меняют занчение val но указывают на те же элементы что и до работы функции OOL
+        // а следовательно не проходят условие на строке 62 и последний элемент листа не меняется (а должен если он больше 9)
 
         if ((l2->next == nullptr)&&(l1->next == nullptr)) // если оба листа пусты
         {

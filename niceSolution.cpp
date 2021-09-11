@@ -1,4 +1,4 @@
-/**
+    /**
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -57,6 +57,7 @@ class Solution
             tempList = tempList->next;
             l2 = l2->next;
         };
+        
         if ((l2->next == nullptr)&&(l1->next == nullptr)) // если оба листа пусты
         {
             if (tempList->val > 9)// если текущий элемент больше 9 перекидываем десятки в новый дополнительный элемент.
